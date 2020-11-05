@@ -1,0 +1,7 @@
+title: TRIMR Configuration
+
+branches:
+  protected:
+    - main
+    - master
+    - development
