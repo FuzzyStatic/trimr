@@ -10,17 +10,12 @@ import (
 	"github.com/go-git/go-git/plumbing"
 	"github.com/manifoldco/promptui"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
-)
-
-const (
-	cfgName = ".trimrconfig"
-	cfgType = "yaml"
 )
 
 // Flags
 var (
-	FlagRepoPath string
+	FlagBranchName string
+	FlagRepoPath   string
 )
 
 type Option func(c *Trimr)
@@ -41,17 +36,20 @@ type (
 )
 
 func NewTrimr(progName, version, buildTime, buildHost string, opts ...Option) (*Trimr, error) {
-	var (
-		t   Trimr
-		err error
-	)
+	var t Trimr
 
 	t.progName = progName
 	t.version = version
 	t.buildTime = buildTime
 	t.buildHost = buildHost
 
-	opts = append([]Option{withCmdVersion()}, opts...)
+	opts = append(
+		[]Option{
+			withCmdConfig(),
+			withCmdVersion(),
+		},
+		opts...,
+	)
 
 	// apply the list of options to Cmd
 	for _, opt := range opts {
@@ -70,11 +68,6 @@ func NewTrimr(progName, version, buildTime, buildHost string, opts ...Option) (*
 	t.rootCmd.Flags().StringVarP(&FlagRepoPath, "path", "p", "", "path to the repository to trim (required)")
 	_ = t.rootCmd.MarkFlagRequired("path")
 
-	err = t.readInConfig()
-	if err != nil {
-		return nil, err
-	}
-
 	return &t, nil
 }
 
@@ -84,6 +77,10 @@ func (t *Trimr) Execute() error {
 
 func (t *Trimr) trimr() func(cmd *cobra.Command, args []string) {
 	return func(cmd *cobra.Command, args []string) {
+		err := t.readInConfig()
+		if err != nil {
+			panic(err)
+		}
 		t.trimRepo()
 	}
 }
@@ -152,25 +149,4 @@ func (t *Trimr) removeBranches() error {
 	}
 
 	return nil
-}
-
-func (t *Trimr) readInConfig() error {
-	viper.SetConfigName(cfgName)
-	viper.SetConfigType(cfgType)
-	viper.AddConfigPath("../configs")
-	err := viper.ReadInConfig()
-	if err != nil {
-		return err
-	}
-
-	t.readInProtectedBranches()
-
-	return nil
-}
-
-func (t *Trimr) readInProtectedBranches() {
-	protectedBranches := viper.Get("branches.protected").([]interface{})
-	for _, protectedBranch := range protectedBranches {
-		t.protectedBranches = append(t.protectedBranches, protectedBranch.(string))
-	}
 }
