@@ -9,19 +9,10 @@ const (
 )
 
 // Compile time variables
-var (
-	Version   string
-	BuildTime string
-	BuildHost string
-)
+var Version string
 
 func main() {
-	t, err := cmd.NewTrimr(
-		progName,
-		Version,
-		BuildTime,
-		BuildHost,
-	)
+	t, err := cmd.NewTrimr(progName, Version)
 	if err != nil {
 		panic(err)
 	}

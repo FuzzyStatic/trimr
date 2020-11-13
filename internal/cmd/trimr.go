@@ -24,7 +24,7 @@ type Option func(c *Trimr)
 type (
 	Trimr struct {
 		// program information
-		progName, version, buildTime, buildHost string
+		progName, version string
 		// root command
 		rootCmd *cobra.Command
 		// slice of commands from opts
@@ -36,13 +36,11 @@ type (
 	}
 )
 
-func NewTrimr(progName, version, buildTime, buildHost string, opts ...Option) (*Trimr, error) {
+func NewTrimr(progName, version string, opts ...Option) (*Trimr, error) {
 	var t Trimr
 
 	t.progName = progName
 	t.version = version
-	t.buildTime = buildTime
-	t.buildHost = buildHost
 
 	opts = append(
 		[]Option{
