@@ -33,10 +33,5 @@ func (t *Trimr) runCmdVer() func(cmd *cobra.Command, args []string) {
 }
 
 func (t *Trimr) printVersion() {
-	fmt.Printf("{\"App\": \"%s\", \"Version\":\"v%s\", \"BuildHost\":\"%s\", \"BuildTime\":\"%s\"}\n",
-		t.progName,
-		t.version,
-		t.buildHost,
-		t.buildTime,
-	)
+	fmt.Printf("%s version %s\n", t.progName, t.version)
 }

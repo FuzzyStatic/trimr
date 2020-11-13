@@ -26,7 +26,7 @@ func (t *Trimr) newCmdCfg() *cobra.Command {
 		Use:     "config",
 		Aliases: []string{"cfg"},
 		Short:   "Manage configuration file",
-		Long:    `Manage the TRIMR configuration file.`,
+		Long:    `Manage the trimr configuration file.`,
 		Args:    cobra.ExactValidArgs(1),
 	}
 
@@ -34,7 +34,7 @@ func (t *Trimr) newCmdCfg() *cobra.Command {
 		Use:     "protected-branch",
 		Aliases: []string{"pb"},
 		Short:   "Manage protected branches",
-		Long:    `Manage the protected branches in the TRIMR configuration file.`,
+		Long:    `Manage the protected branches in the trimr configuration file.`,
 		Args:    cobra.ExactValidArgs(1),
 	}
 
@@ -42,7 +42,7 @@ func (t *Trimr) newCmdCfg() *cobra.Command {
 		Use:     "add",
 		Aliases: []string{"a"},
 		Short:   "Add protected branch",
-		Long:    `Add protected branch the TRIMR configuration file.`,
+		Long:    `Add protected branch the trimr configuration file.`,
 		Args:    cobra.NoArgs,
 		Run:     t.runCmdPBAdd(),
 	}
@@ -54,7 +54,7 @@ func (t *Trimr) newCmdCfg() *cobra.Command {
 		Use:     "list",
 		Aliases: []string{"l"},
 		Short:   "List protected branches",
-		Long:    `List protected branches from the TRIMR configuration file.`,
+		Long:    `List protected branches from the trimr configuration file.`,
 		Args:    cobra.NoArgs,
 		Run:     t.runCmdPBList(),
 	}
@@ -63,7 +63,7 @@ func (t *Trimr) newCmdCfg() *cobra.Command {
 		Use:     "remove",
 		Aliases: []string{"rm"},
 		Short:   "Remove protected branch",
-		Long:    `Remove protected branch the TRIMR configuration file.`,
+		Long:    `Remove protected branch the trimr configuration file.`,
 		Args:    cobra.NoArgs,
 		Run:     t.runCmdPBRemove(),
 	}
