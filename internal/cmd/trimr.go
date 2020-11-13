@@ -15,6 +15,7 @@ import (
 // Flags
 var (
 	FlagBranchName string
+	FlagNoConfirm  bool
 	FlagRepoPath   string
 )
 
@@ -66,6 +67,7 @@ func NewTrimr(progName, version, buildTime, buildHost string, opts ...Option) (*
 	}
 
 	t.rootCmd.Flags().StringVarP(&FlagRepoPath, "path", "p", "", "path to the repository to trim (required)")
+	t.rootCmd.Flags().BoolVarP(&FlagNoConfirm, "no-confirm", "", false, "skip confirmation dialog")
 	_ = t.rootCmd.MarkFlagRequired("path")
 
 	return &t, nil
@@ -123,15 +125,17 @@ func (t *Trimr) removeBranches() error {
 
 			if !protected {
 				// Prompt for branch deletion
-				prompt := promptui.Prompt{
-					Label:     fmt.Sprintf("Delete branch \"%s\"", ref.Name().Short()),
-					IsConfirm: true,
-				}
+				if !FlagNoConfirm {
+					prompt := promptui.Prompt{
+						Label:     fmt.Sprintf("Delete branch \"%s\"", ref.Name().Short()),
+						IsConfirm: true,
+					}
 
-				_, err := prompt.Run()
-				if err != nil {
-					// Return if y is not input
-					return nil
+					_, err := prompt.Run()
+					if err != nil {
+						// Return if y is not input
+						return nil
+					}
 				}
 
 				// Delete branch

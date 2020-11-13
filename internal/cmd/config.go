@@ -68,7 +68,7 @@ func (t *Trimr) newCmdCfg() *cobra.Command {
 		Run:     t.runCmdPBRemove(),
 	}
 
-	cmdPBRemove.Flags().StringVarP(&FlagBranchName, "name", "n", "", "name of branch to unprotect (require)")
+	cmdPBRemove.Flags().StringVarP(&FlagBranchName, "name", "n", "", "name of branch to unprotect (required)")
 	_ = cmdPBRemove.MarkFlagRequired("name")
 
 	cmdPB.AddCommand(cmdPBList)
