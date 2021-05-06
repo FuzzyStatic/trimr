@@ -5,12 +5,12 @@ import (
 	"os"
 	"strings"
 
+	"github.com/FuzzyStatic/viper"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
 const (
-	cfgName = ".trimrconfig.yaml"
+	cfgName = ".trimrconfig"
 	cfgType = "yaml"
 )
 
@@ -168,7 +168,7 @@ func (t *Trimr) removeProtectedBranch() {
 func createDefaultConfig(homeDir string) {
 	viper.SetDefault("title", "TRIMR Configuration")
 	viper.SetDefault("branches.protected", []string{"main", "master"})
-	err := viper.WriteConfigAs(fmt.Sprintf("%s/.trimrconfig.yaml", homeDir))
+	err := viper.WriteConfigAs(homeDir + "/" + cfgName)
 	if err != nil {
 		panic(err)
 	}

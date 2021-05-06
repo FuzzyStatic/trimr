@@ -21,7 +21,7 @@ Do you work in a high velocity environment where you are constantly creating new
 
 ### `trimr`
 
-To run the trimr program, simplly give it the path to your repository:
+To run the trimr program, simply give it the path to your repository:
 
 ```bash
 trimr -p <repository_dir>
@@ -33,7 +33,7 @@ Trimr will then give you a prompt asking you if you want to delete a specific br
 
 Trimr ignores branches listed in the trimr configuration file under `branches.protected`. The config command allows you to add or remove branches from the protected branches list.
 
-You can add a branch to the protected bracnhes list as follows:
+You can add a branch to the protected branches list as follows:
 
 ```bash
 trimr config protected-branch add -n <branch_name>
@@ -52,3 +52,4 @@ You can download pre-built binaries from the [latest release](https://github.com
 ## TODO
 
 - Ability to trim remote branches
+- Per repo configuration
