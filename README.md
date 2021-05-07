@@ -1,6 +1,6 @@
 # trimr
 
-> trimr - Trim those unused branches with ease.
+> trimr - Trim those unused git branches with ease.
 
 ## Table of Contents
 
