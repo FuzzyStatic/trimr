@@ -49,6 +49,13 @@ trimr config protected-branch remove -n <branch_name>
 
 You can download pre-built binaries from the [latest release](https://github.com/FuzzyStatic/trimr/releases) and copy them to your preferred binary directory.
 
+To install on macOS using [Homebrew](https://brew.sh/):
+
+```shell
+brew tap FuzzyStatic/homebrew-tap
+brew install trimr
+```
+
 ## TODO
 
 - Ability to trim remote branches
